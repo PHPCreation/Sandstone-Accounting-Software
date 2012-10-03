@@ -1,0 +1,14 @@
+elcweb_theme:
+    resource: "@ElcwebThemeBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+elcweb_accounting:
+    resource: "@ElcwebAccountingBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+# Internal routing configuration to handle ESI
+#_internal:
+#    resource: "@FrameworkBundle/Resources/config/routing/internal.xml"
+#    prefix:   /_internal
