@@ -1,0 +1,15 @@
+web/bundles/
+app/bootstrap.php.cache
+app/cache/*
+app/logs/*
+build/
+vendor
+bin/*
+web/bundles
+.bash_aliases
+.bash_history
+.bash_logout
+.bashrc
+.profile
+.ssh
+.viminfo
