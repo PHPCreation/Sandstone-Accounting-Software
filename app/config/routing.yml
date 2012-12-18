@@ -1,3 +1,8 @@
+elcweb_customer:
+    resource: "@ElcwebCustomerBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
 elcweb_theme:
     resource: "@ElcwebThemeBundle/Controller/"
     type:     annotation

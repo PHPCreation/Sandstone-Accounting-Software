@@ -23,6 +23,7 @@ class AppKernel extends Kernel
 	    new Knp\Bundle\MenuBundle\KnpMenuBundle(),
             new Elcweb\Bundle\AccountingBundle\ElcwebAccountingBundle(),
             new Elcweb\Bundle\ThemeBundle\ElcwebThemeBundle(),
+            new Elcweb\Bundle\CustomerBundle\ElcwebCustomerBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
