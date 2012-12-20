@@ -1,33 +1,33 @@
 <?php
 
-namespace Elcweb\Bundle\CustomerBundle\Controller;
+namespace Elcweb\Bundle\AccountingBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use Elcweb\Bundle\CustomerBundle\Entity\Customer;
-use Elcweb\Bundle\CustomerBundle\Form\CustomerType;
+use Elcweb\Bundle\AccountingBundle\Entity\Term;
+use Elcweb\Bundle\AccountingBundle\Form\TermType;
 
 /**
- * Customer controller.
+ * Term controller.
  *
- * @Route("/customer")
+ * @Route("/term")
  */
-class CustomerController extends Controller
+class TermController extends Controller
 {
     /**
-     * Lists all Customer entities.
+     * Lists all Term entities.
      *
-     * @Route("/", name="customer")
+     * @Route("/", name="term")
      * @Template()
      */
     public function indexAction()
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entities = $em->getRepository('ElcwebCustomerBundle:Customer')->findAll();
+        $entities = $em->getRepository('ElcwebAccountingBundle:Term')->findAll();
 
         return array(
             'entities' => $entities,
@@ -35,19 +35,19 @@ class CustomerController extends Controller
     }
 
     /**
-     * Finds and displays a Customer entity.
+     * Finds and displays a Term entity.
      *
-     * @Route("/{id}/show", name="customer_show")
+     * @Route("/{id}/show", name="term_show")
      * @Template()
      */
     public function showAction($id)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('ElcwebCustomerBundle:Customer')->find($id);
+        $entity = $em->getRepository('ElcwebAccountingBundle:Term')->find($id);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Customer entity.');
+            throw $this->createNotFoundException('Unable to find Term entity.');
         }
 
         $deleteForm = $this->createDeleteForm($id);
@@ -59,15 +59,15 @@ class CustomerController extends Controller
     }
 
     /**
-     * Displays a form to create a new Customer entity.
+     * Displays a form to create a new Term entity.
      *
-     * @Route("/new", name="customer_new")
+     * @Route("/new", name="term_new")
      * @Template()
      */
     public function newAction()
     {
-        $entity = new Customer();
-        $form   = $this->createForm(new CustomerType(), $entity);
+        $entity = new Term();
+        $form   = $this->createForm(new TermType(), $entity);
 
         return array(
             'entity' => $entity,
@@ -76,16 +76,16 @@ class CustomerController extends Controller
     }
 
     /**
-     * Creates a new Customer entity.
+     * Creates a new Term entity.
      *
-     * @Route("/create", name="customer_create")
+     * @Route("/create", name="term_create")
      * @Method("POST")
-     * @Template("ElcwebCustomerBundle:Customer:new.html.twig")
+     * @Template("ElcwebAccountingBundle:Term:new.html.twig")
      */
     public function createAction(Request $request)
     {
-        $entity  = new Customer();
-        $form = $this->createForm(new CustomerType(), $entity);
+        $entity  = new Term();
+        $form = $this->createForm(new TermType(), $entity);
         $form->bind($request);
 
         if ($form->isValid()) {
@@ -93,7 +93,7 @@ class CustomerController extends Controller
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('customer'));
+            return $this->redirect($this->generateUrl('term_show', array('id' => $entity->getId())));
         }
 
         return array(
@@ -103,22 +103,22 @@ class CustomerController extends Controller
     }
 
     /**
-     * Displays a form to edit an existing Customer entity.
+     * Displays a form to edit an existing Term entity.
      *
-     * @Route("/{id}/edit", name="customer_edit")
+     * @Route("/{id}/edit", name="term_edit")
      * @Template()
      */
     public function editAction($id)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('ElcwebCustomerBundle:Customer')->find($id);
+        $entity = $em->getRepository('ElcwebAccountingBundle:Term')->find($id);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Customer entity.');
+            throw $this->createNotFoundException('Unable to find Term entity.');
         }
 
-        $editForm = $this->createForm(new CustomerType(), $entity);
+        $editForm = $this->createForm(new TermType(), $entity);
         $deleteForm = $this->createDeleteForm($id);
 
         return array(
@@ -129,31 +129,31 @@ class CustomerController extends Controller
     }
 
     /**
-     * Edits an existing Customer entity.
+     * Edits an existing Term entity.
      *
-     * @Route("/{id}/update", name="customer_update")
+     * @Route("/{id}/update", name="term_update")
      * @Method("POST")
-     * @Template("ElcwebCustomerBundle:Customer:edit.html.twig")
+     * @Template("ElcwebAccountingBundle:Term:edit.html.twig")
      */
     public function updateAction(Request $request, $id)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('ElcwebCustomerBundle:Customer')->find($id);
+        $entity = $em->getRepository('ElcwebAccountingBundle:Term')->find($id);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Customer entity.');
+            throw $this->createNotFoundException('Unable to find Term entity.');
         }
 
         $deleteForm = $this->createDeleteForm($id);
-        $editForm = $this->createForm(new CustomerType(), $entity);
+        $editForm = $this->createForm(new TermType(), $entity);
         $editForm->bind($request);
 
         if ($editForm->isValid()) {
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('customer'));
+            return $this->redirect($this->generateUrl('term_edit', array('id' => $id)));
         }
 
         return array(
@@ -164,9 +164,9 @@ class CustomerController extends Controller
     }
 
     /**
-     * Deletes a Customer entity.
+     * Deletes a Term entity.
      *
-     * @Route("/{id}/delete", name="customer_delete")
+     * @Route("/{id}/delete", name="term_delete")
      * @Method("POST")
      */
     public function deleteAction(Request $request, $id)
@@ -176,17 +176,17 @@ class CustomerController extends Controller
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $entity = $em->getRepository('ElcwebCustomerBundle:Customer')->find($id);
+            $entity = $em->getRepository('ElcwebAccountingBundle:Term')->find($id);
 
             if (!$entity) {
-                throw $this->createNotFoundException('Unable to find Customer entity.');
+                throw $this->createNotFoundException('Unable to find Term entity.');
             }
 
             $em->remove($entity);
             $em->flush();
         }
 
-        return $this->redirect($this->generateUrl('customer'));
+        return $this->redirect($this->generateUrl('term'));
     }
 
     private function createDeleteForm($id)

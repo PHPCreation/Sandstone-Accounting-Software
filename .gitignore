@@ -13,3 +13,4 @@ web/bundles
 .profile
 .ssh
 .viminfo
+app/config/parameters.yml

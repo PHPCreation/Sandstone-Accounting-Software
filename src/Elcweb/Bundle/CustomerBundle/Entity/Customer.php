@@ -9,6 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
  *
  * @ORM\Table()
  * @ORM\Entity
+ * @ORM\HasLifecycleCallbacks
  */
 class Customer
 {
@@ -43,26 +44,30 @@ class Customer
     private $displayname;
 
     /**
-     * @var string $terms
      *
-     * @ORM\Column(name="terms", type="string", length=255)
+     * @ORM\ManyToOne(targetEntity="Elcweb\Bundle\AccountingBundle\Entity\Term", inversedBy="customers")
+     * @ORM\JoinColumn(name="term_id", referencedColumnName="id")
      */
     private $terms;
 
     /**
-     * @var datetime $created_at
+     * @var datetime $createdAt
      *
      * @ORM\Column(name="created_at", type="datetime")
      */
-    private $created_at;
+    private $createdAt;
 
     /**
-     * @var datetime $modified_at
+     * @var datetime $modifiedAt
      *
-     * @ORM\Column(name="modified_at", type="datetime")
+     * @ORM\Column(name="modified_at", type="datetime", nullable=true)
      */
-    private $modified_at;
+    private $modifiedAt;
 
+    public function __construct()
+    {
+        $this->createdAt = new \DateTime();
+    }
 
     /**
      * Get id
@@ -170,7 +175,7 @@ class Customer
      */
     public function setCreatedAt($createdAt)
     {
-        $this->created_at = $createdAt;
+        $this->createdAt = $createdAt;
         return $this;
     }
 
@@ -181,7 +186,7 @@ class Customer
      */
     public function getCreatedAt()
     {
-        return $this->created_at;
+        return $this->createdAt;
     }
 
     /**
@@ -192,7 +197,7 @@ class Customer
      */
     public function setModifiedAt($modifiedAt)
     {
-        $this->modified_at = $modifiedAt;
+        $this->modifiedAt = $modifiedAt;
         return $this;
     }
 
@@ -203,6 +208,16 @@ class Customer
      */
     public function getModifiedAt()
     {
-        return $this->modified_at;
+        return $this->modifiedAt;
+    }
+
+    /**
+     * Invoked before the entity is updated.
+     *
+     * @ORM\PreUpdate
+     */
+    public function preUpdate()
+    {
+        $this->updatedAt = new \DateTime();
     }
 }

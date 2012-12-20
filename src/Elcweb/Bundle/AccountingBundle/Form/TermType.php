@@ -1,32 +1,30 @@
 <?php
 
-namespace Elcweb\Bundle\CustomerBundle\Form;
+namespace Elcweb\Bundle\AccountingBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-class CustomerType extends AbstractType
+class TermType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
             ->add('name')
-            ->add('company')
-            ->add('displayname')
-            ->add('terms')
+            ->add('netduein')
         ;
     }
 
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'Elcweb\Bundle\CustomerBundle\Entity\Customer'
+            'data_class' => 'Elcweb\Bundle\AccountingBundle\Entity\Term'
         ));
     }
 
     public function getName()
     {
-        return 'elcweb_bundle_customerbundle_customertype';
+        return 'elcweb_bundle_accountingbundle_termtype';
     }
 }

@@ -5,12 +5,12 @@ namespace Elcweb\Bundle\AccountingBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Elcweb\Bundle\AccountingBundle\Entity\Term
+ * Elcweb\Bundle\AccountingBundle\Entity\AccountType
  *
  * @ORM\Table()
  * @ORM\Entity
  */
-class Term
+class AccountType
 {
     /**
      * @var integer $id
@@ -28,13 +28,6 @@ class Term
      */
     private $name;
 
-    /**
-     * @var integer $netduein
-     *
-     * @ORM\Column(name="netduein", type="integer")
-     */
-    private $netduein;
-
 
     /**
      * Get id
@@ -50,7 +43,7 @@ class Term
      * Set name
      *
      * @param string $name
-     * @return Term
+     * @return AccountType
      */
     public function setName($name)
     {
@@ -66,35 +59,5 @@ class Term
     public function getName()
     {
         return $this->name;
-    }
-
-    /**
-     * Set netduein
-     *
-     * @param integer $netduein
-     * @return Term
-     */
-    public function setNetduein($netduein)
-    {
-        $this->netduein = $netduein;
-        return $this;
-    }
-
-    /**
-     * Get netduein
-     *
-     * @return integer 
-     */
-    public function getNetduein()
-    {
-        return $this->netduein;
-    }
-
-    /**
-     * @return string $name
-     */
-    public function __toString()
-    {
-        return $this->getName();
     }
 }

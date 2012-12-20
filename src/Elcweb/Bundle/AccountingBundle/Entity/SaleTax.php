@@ -5,12 +5,12 @@ namespace Elcweb\Bundle\AccountingBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Elcweb\Bundle\AccountingBundle\Entity\Term
+ * Elcweb\Bundle\AccountingBundle\Entity\SaleTax
  *
  * @ORM\Table()
  * @ORM\Entity
  */
-class Term
+class SaleTax
 {
     /**
      * @var integer $id
@@ -29,11 +29,18 @@ class Term
     private $name;
 
     /**
-     * @var integer $netduein
+     * @var string $description
      *
-     * @ORM\Column(name="netduein", type="integer")
+     * @ORM\Column(name="description", type="string", length=255)
      */
-    private $netduein;
+    private $description;
+
+    /**
+     * @var boolean $taxable
+     *
+     * @ORM\Column(name="taxable", type="boolean")
+     */
+    private $taxable;
 
 
     /**
@@ -50,7 +57,7 @@ class Term
      * Set name
      *
      * @param string $name
-     * @return Term
+     * @return SaleTax
      */
     public function setName($name)
     {
@@ -69,32 +76,46 @@ class Term
     }
 
     /**
-     * Set netduein
+     * Set description
      *
-     * @param integer $netduein
-     * @return Term
+     * @param string $description
+     * @return SaleTax
      */
-    public function setNetduein($netduein)
+    public function setDescription($description)
     {
-        $this->netduein = $netduein;
+        $this->description = $description;
         return $this;
     }
 
     /**
-     * Get netduein
+     * Get description
      *
-     * @return integer 
+     * @return string 
      */
-    public function getNetduein()
+    public function getDescription()
     {
-        return $this->netduein;
+        return $this->description;
     }
 
     /**
-     * @return string $name
+     * Set taxable
+     *
+     * @param boolean $taxable
+     * @return SaleTax
      */
-    public function __toString()
+    public function setTaxable($taxable)
     {
-        return $this->getName();
+        $this->taxable = $taxable;
+        return $this;
+    }
+
+    /**
+     * Get taxable
+     *
+     * @return boolean 
+     */
+    public function getTaxable()
+    {
+        return $this->taxable;
     }
 }

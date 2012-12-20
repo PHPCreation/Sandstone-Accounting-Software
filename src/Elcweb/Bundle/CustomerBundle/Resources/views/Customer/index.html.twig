@@ -1,9 +1,11 @@
-<h1>Customer list</h1>
+{% extends 'ElcwebThemeBundle::base.html.twig' %}
 
+{% block title %}Customer list{% endblock %}
+
+{% block content %}
 <table class="records_list">
     <thead>
         <tr>
-            <th>Id</th>
             <th>Name</th>
             <th>Company</th>
             <th>Displayname</th>
@@ -16,32 +18,20 @@
     <tbody>
     {% for entity in entities %}
         <tr>
-            <td><a href="{{ path('customer_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
-            <td>{{ entity.name }}</td>
+            <td><a href="{{ path('customer_show', { 'id': entity.id }) }}">{{ entity.name }}</a></td>
             <td>{{ entity.company }}</td>
             <td>{{ entity.displayname }}</td>
             <td>{{ entity.terms }}</td>
             <td>{% if entity.createdat %}{{ entity.createdat|date('Y-m-d H:i:s') }}{% endif %}</td>
             <td>{% if entity.modifiedat %}{{ entity.modifiedat|date('Y-m-d H:i:s') }}{% endif %}</td>
             <td>
-                <ul>
-                    <li>
-                        <a href="{{ path('customer_show', { 'id': entity.id }) }}">show</a>
-                    </li>
-                    <li>
-                        <a href="{{ path('customer_edit', { 'id': entity.id }) }}">edit</a>
-                    </li>
-                </ul>
+                <a href="{{ path('customer_show', { 'id': entity.id }) }}" class="btn">show</a>
+                <a href="{{ path('customer_edit', { 'id': entity.id }) }}" class="btn">edit</a>
             </td>
         </tr>
     {% endfor %}
     </tbody>
 </table>
 
-<ul>
-    <li>
-        <a href="{{ path('customer_new') }}">
-            Create a new entry
-        </a>
-    </li>
-</ul>
+<a href="{{ path('customer_new') }}" class="btn">Create a new entry</a>
+{% endblock %}
