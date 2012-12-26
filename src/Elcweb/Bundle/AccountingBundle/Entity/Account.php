@@ -29,11 +29,25 @@ class Account
     private $name;
 
     /**
-     * @var string $type
+     * @var string $code
      *
-     * @ORM\Column(name="type", type="string", length=255)
+     * @ORM\Column(name="code", type="string", length=10)
+     */
+    private $code;
+
+    /**
+     * @var string type
+     *
+     * @ORM\ManyToOne(targetEntity="AccountType", inversedBy="accounts")
      */
     private $type;
+
+    /**
+     * @var string $category
+     *
+     * Comment : ORM\ManyToOne(targetEntity="AccountCategory", inversedBy="accounts")
+     */
+    private $category;
 
     /**
      * @var string $parent
@@ -83,25 +97,25 @@ class Account
     }
 
     /**
-     * Set type
+     * Set category
      *
-     * @param string $type
+     * @param string $category
      * @return Account
      */
-    public function setType($type)
+    public function setCategory($category)
     {
-        $this->type = $type;
+        $this->category = $category;
         return $this;
     }
 
     /**
-     * Get type
+     * Get category
      *
      * @return string 
      */
-    public function getType()
+    public function getCategory()
     {
-        return $this->type;
+        return $this->category;
     }
 
     /**
@@ -146,5 +160,31 @@ class Account
     public function getDescription()
     {
         return $this->description;
+    }
+    public function __construct()
+    {
+        $this->category = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+    
+    /**
+     * Add category
+     *
+     * @param Elcweb\Bundle\AccountingBundle\Entity\AccountCategory $category
+     * @return Account
+     */
+    public function addCategory(\Elcweb\Bundle\AccountingBundle\Entity\AccountCategory $category)
+    {
+        $this->category[] = $category;
+        return $this;
+    }
+
+    /**
+     * Remove category
+     *
+     * @param Elcweb\Bundle\AccountingBundle\Entity\AccountCategory $category
+     */
+    public function removeCategory(\Elcweb\Bundle\AccountingBundle\Entity\AccountCategory $category)
+    {
+        $this->category->removeElement($category);
     }
 }

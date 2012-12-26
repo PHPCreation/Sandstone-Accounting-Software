@@ -5,12 +5,12 @@ namespace Elcweb\Bundle\AccountingBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Elcweb\Bundle\AccountingBundle\Entity\AccountType
+ * Elcweb\Bundle\AccountingBundle\Entity\AccountCategory
  *
  * @ORM\Table()
  * @ORM\Entity
  */
-class AccountType
+class AccountCategory
 {
     /**
      * @var integer $id
@@ -27,14 +27,13 @@ class AccountType
      * @ORM\Column(name="name", type="string", length=255)
      */
     private $name;
-
+    
     /**
-     * @var string $value
+     * @var string $description
      *
-     * @ORM\Column(name="value", type="string", length=1)
+     * @ORM\Column(name="description", type="string", length=255)
      */
-    private $value;
-
+    private $description;
 
     /**
      * Get id
@@ -69,24 +68,24 @@ class AccountType
     }
 
     /**
-     * Set value
+     * Set description
      *
-     * @param string $value
-     * @return AccountType
+     * @param string $description
+     * @return AccountCategory
      */
-    public function setValue($value)
+    public function setDescription($description)
     {
-        $this->value = $value;
+        $this->description = $description;
         return $this;
     }
 
     /**
-     * Get value
+     * Get description
      *
      * @return string 
      */
-    public function getValue()
+    public function getDescription()
     {
-        return $this->value;
+        return $this->description;
     }
 }
