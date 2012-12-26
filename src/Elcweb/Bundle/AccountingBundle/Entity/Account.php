@@ -52,7 +52,7 @@ class Account
     /**
      * @var string $parent
      *
-     * @ORM\Column(name="parent", type="string", length=255)
+     * @ORM\Column(name="parent", type="string", length=255, nullable=true)
      */
     private $parent;
 
@@ -186,5 +186,49 @@ class Account
     public function removeCategory(\Elcweb\Bundle\AccountingBundle\Entity\AccountCategory $category)
     {
         $this->category->removeElement($category);
+    }
+
+    /**
+     * Set code
+     *
+     * @param string $code
+     * @return Account
+     */
+    public function setCode($code)
+    {
+        $this->code = $code;
+        return $this;
+    }
+
+    /**
+     * Get code
+     *
+     * @return string 
+     */
+    public function getCode()
+    {
+        return $this->code;
+    }
+
+    /**
+     * Set type
+     *
+     * @param Elcweb\Bundle\AccountingBundle\Entity\AccountType $type
+     * @return Account
+     */
+    public function setType(\Elcweb\Bundle\AccountingBundle\Entity\AccountType $type = null)
+    {
+        $this->type = $type;
+        return $this;
+    }
+
+    /**
+     * Get type
+     *
+     * @return Elcweb\Bundle\AccountingBundle\Entity\AccountType 
+     */
+    public function getType()
+    {
+        return $this->type;
     }
 }
